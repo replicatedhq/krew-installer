@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: krew-installer
+spec:
+  selector:
+    matchLabels:
+      app: krew-installer
+  template:
+    metadata:
+      labels:
+        app: krew-installer
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 2
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - krew-installer
+              topologyKey: "kubernetes.io/hostname"
+      restartPolicy: Always
+      containers:
+        - name: krew-installer
+          image: krew-installer
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 3000
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 3000
+            initialDelaySeconds: 2
+            periodSeconds: 2
