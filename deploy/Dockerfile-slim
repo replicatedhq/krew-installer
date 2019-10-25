@@ -1,0 +1,15 @@
+FROM node:12-slim
+
+ARG version=unknown
+ENV VERSION=$version
+
+ADD web /src
+ADD build/templates /templates
+ADD build/bin/server /bin
+
+WORKDIR /src
+
+RUN chmod +x /src/bin/kurl
+
+EXPOSE 3000
+CMD ["node", "--no-deprecation", "bin/kurl", "serve"]
