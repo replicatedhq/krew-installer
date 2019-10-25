@@ -1,0 +1,17 @@
+FROM repldev/krew-installer:latest
+
+WORKDIR /src
+
+ADD Makefile .
+ADD package.json .
+ADD yarn.lock .
+RUN make deps
+
+ADD . .
+RUN mv templates /templates
+RUN mv bin/server /bin
+RUN make build
+
+EXPOSE 3000
+
+ENTRYPOINT ["node", "--no-deprecation", "bin/krew-installer", "serve"]
