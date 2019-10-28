@@ -6,10 +6,11 @@ ENV VERSION=$version
 ADD web /src
 ADD build/templates /templates
 ADD build/bin/server /bin
+add scripts /src
 
 WORKDIR /src
 
-RUN chmod +x /src/bin/kurl
+RUN chmod +x /src/bin/krew-installer
 
 EXPOSE 3000
-CMD ["node", "--no-deprecation", "bin/kurl", "serve"]
+CMD ["node", "--no-deprecation", "bin/krew-installer", "serve"]

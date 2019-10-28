@@ -15,7 +15,7 @@ function initLoggerFromEnv(): pino.Logger {
     fs.createWriteStream(process.env.LOG_FILE) :
     process.stdout;
 
-  const component = "kurl";
+  const component = "krew-installer";
   const options = {
     name: component,
     level: pinoLevel,
