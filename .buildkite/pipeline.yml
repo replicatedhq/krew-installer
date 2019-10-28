@@ -1,0 +1,11 @@
+steps:
+  - label: build
+    commands:
+      - make test build
+    plugins:
+      - docker#v3.2.0:
+          image: replicated/gitops-builder:buildkite-go12-node10
+          always-pull: true
+          mount-checkout: true
+          workdir: /go/src/github.com/replicatedhq/krew-installer
+
