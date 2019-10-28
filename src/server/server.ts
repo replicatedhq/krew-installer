@@ -13,12 +13,8 @@ import * as cors from "cors";
 import { $log } from "ts-log-debug";
 import * as path from "path";
 import * as Express from "express";
-import { ErrorMiddleware } from "./errors";
 import * as RateLimit from "express-rate-limit";
 import { TSEDVerboseLogging } from "../logger";
-import { consoleReporter } from "replicated-lint/dist/cmdutil/reporters";
-import { initMysqlPool } from "../util/persistence/mysql";
-import { Installer } from "../installers";
 
 @ServerSettings({
   rootDir: path.resolve(__dirname),
@@ -48,7 +44,6 @@ export class Server extends ServerLoader {
   }
 
   public async $onInit(): Promise<void> {
-    await initMysqlPool();
   }
 
   /**
