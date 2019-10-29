@@ -21,7 +21,7 @@ steps:
       - mkdir -p build
       - buildkite-agent artifact download bin/* bin/
       - buildkite-agent artifact download build/* build/
-      - buildkite-agent artifact download node_modules.tar.gz build/
+      - buildkite-agent artifact download node_modules.tar.gz .
       - tar xzf node_modules.tar.gz
       - rm node_modules.tar.gz
       - rm .dockerignore && cp deploy/.dockerignore .
@@ -41,7 +41,7 @@ steps:
       - mkdir -p build
       - buildkite-agent artifact download bin/* bin/
       - buildkite-agent artifact download build/* build/
-      - buildkite-agent artifact download node_modules.tar.gz build/
+      - buildkite-agent artifact download node_modules.tar.gz .
       - tar xzf node_modules.tar.gz
       - rm node_modules.tar.gz
       - rm .dockerignore && cp deploy/.dockerignore .
