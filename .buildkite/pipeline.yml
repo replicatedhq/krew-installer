@@ -4,6 +4,7 @@ steps:
       - make deps build
     artifact_paths:
       - "bin/*"
+      - "build/*"
     plugins:
       - docker#v3.2.0:
           image: replicated/gitops-builder:buildkite-go12-node10
