@@ -16,6 +16,7 @@ steps:
   - label: build staging image
     commands:
       - mkdir -p bin
+      - mkdir -p build
       - buildkite-agent artifact download bin/* bin/
       - buildkite-agent artifact download build/* build/
       - ls
@@ -31,6 +32,7 @@ steps:
   - label: build production image
     commands:
       - mkdir -p bin
+      - mkdir -p build
       - buildkite-agent artifact download bin/* bin/
       - buildkite-agent artifact download build/* build/
       - ls
