@@ -16,8 +16,8 @@ steps:
   - label: build staging image
     commands:
       - mkdir -p bin
-      - buildkite-agent artifact download bin/krew-installer bin/
-      - buildkite-agent artifact download bin/newrelic.js bin/
+      - buildkite-agent artifact download bin/* bin/
+      - buildkite-agent artifact download build/* build/
       - ls
       - make build-staging
     branches: master
@@ -31,8 +31,8 @@ steps:
   - label: build production image
     commands:
       - mkdir -p bin
-      - buildkite-agent artifact download bin/krew-installer bin/
-      - buildkite-agent artifact download bin/newrelic.js bin/
+      - buildkite-agent artifact download bin/* bin/
+      - buildkite-agent artifact download build/* build/
       - ls
       - make build-production
     branches: master
