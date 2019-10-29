@@ -2,6 +2,8 @@ steps:
   - label: build
     commands:
       - make deps build
+    artifact_paths:
+      - "bin/*"
     plugins:
       - docker#v3.2.0:
           image: replicated/gitops-builder:buildkite-go12-node10
@@ -9,3 +11,22 @@ steps:
           mount-checkout: true
           workdir: /go/src/github.com/replicatedhq/krew-installer
 
+  - wait
+
+  - label: build staging image
+    commands:
+      - buildkite-agent artifact download bin/krew-installer bin/
+      - buildkite-agent artifact download bin/newrelic.js bin/
+      - ls
+      - build-staging
+
+  - label: build production image
+    commands:
+      - buildkite-agent artifact download bin/krew-installer bin/
+      - buildkite-agent artifact download bin/newrelic.js bin/
+      - ls
+      - build-production
+
+  - wait
+
+  

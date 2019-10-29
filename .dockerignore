@@ -1,1 +1,5 @@
 node_modules/
+Dockerfile
+Dockerfile.skaffold
+Dockerfile.skaffoldcache
+deploy/

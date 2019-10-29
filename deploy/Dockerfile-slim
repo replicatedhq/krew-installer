@@ -3,14 +3,11 @@ FROM node:12-slim
 ARG version=unknown
 ENV VERSION=$version
 
-ADD web /src
-ADD build/templates /templates
-ADD build/bin/server /bin
-add scripts /src
-
+ADD . /src
 WORKDIR /src
-
 RUN chmod +x /src/bin/krew-installer
+
+RUN yarn --silent --frozen-lockfile
 
 EXPOSE 3000
 CMD ["node", "--no-deprecation", "bin/krew-installer", "serve"]
