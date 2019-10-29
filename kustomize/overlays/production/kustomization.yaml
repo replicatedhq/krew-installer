@@ -1,5 +1,8 @@
 bases:
 - ../../base
 
+resources:
+- ./disruptionbudget.yaml
+
 patchesStrategicMerge:
 - ./deployment.yaml

@@ -45,3 +45,23 @@ steps:
 
   - wait
 
+  - commands:
+      - make publish-staging
+    branches: master
+    retry:
+      automatic:
+        # this command exiting with status 2 typically means that the git commit collided with another
+        - exit_status: 2
+          limit: 5
+
+  - block: "Release to production"
+    branches: master
+
+  - commands:
+      - make publish-production
+    branches: master
+    retry:
+      automatic:
+        # this command exiting with status 2 typically means that the git commit collided with another
+        - exit_status: 2
+          limit: 5

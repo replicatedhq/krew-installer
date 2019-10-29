@@ -21,7 +21,7 @@ spec:
             path: /var/run/sigsci
       containers:
         - name: krew-installer
-          image: kotsadm/krew-installer
+          image: 923411875752.dkr.ecr.us-east-1.amazonaws.com/krew-installer:latest
           imagePullPolicy: Always
           volumeMounts:
             - mountPath: /var/run/sigsci/
