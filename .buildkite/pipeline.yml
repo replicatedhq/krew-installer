@@ -1,10 +1,11 @@
 steps:
   - label: build
     commands:
-      - make deps build
+      - make deps build archive-modules
     artifact_paths:
       - "bin/*"
       - "build/*"
+      - "node_modules.tar.gz"
     plugins:
       - docker#v3.2.0:
           image: replicated/gitops-builder:buildkite-go12-node10
@@ -20,6 +21,10 @@ steps:
       - mkdir -p build
       - buildkite-agent artifact download bin/* bin/
       - buildkite-agent artifact download build/* build/
+      - buildkite-agent artifact download node_modules.tar.gz build/
+      - tar xzf node_modules.tar.gz
+      - rm node_modules.tar.gz
+      - rm .dockerignore && cp deploy/.dockerignore .
       - ls
       - make build-staging
     branches: master
@@ -36,6 +41,10 @@ steps:
       - mkdir -p build
       - buildkite-agent artifact download bin/* bin/
       - buildkite-agent artifact download build/* build/
+      - buildkite-agent artifact download node_modules.tar.gz build/
+      - tar xzf node_modules.tar.gz
+      - rm node_modules.tar.gz
+      - rm .dockerignore && cp deploy/.dockerignore .
       - ls
       - make build-production
     branches: master

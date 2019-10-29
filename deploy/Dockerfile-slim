@@ -7,7 +7,5 @@ ADD . /src
 WORKDIR /src
 RUN chmod +x /src/bin/krew-installer
 
-RUN yarn --silent --frozen-lockfile
-
 EXPOSE 3000
 CMD ["node", "--no-deprecation", "bin/krew-installer", "serve"]
