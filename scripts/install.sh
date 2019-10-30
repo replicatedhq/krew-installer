@@ -30,6 +30,3 @@ then
 else
     echo "~/.bashrc not found, please add '$EXPORT_PATH_STRING' to your login script"
 fi
-
-# install krew plugin if requested
-

@@ -31,6 +31,6 @@ else
     echo "~/.bashrc not found, please add '$EXPORT_PATH_STRING' to your login script"
 fi
 
-# install krew plugin if requested
+# install requested krew plugin
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 kubectl-krew install {{= plugin }}
