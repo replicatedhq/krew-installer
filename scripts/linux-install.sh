@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x
+set -e
 
 # run krew install process
 
