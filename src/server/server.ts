@@ -9,11 +9,11 @@ import {
   ServerSettings,
 } from "ts-express-decorators";
 import * as bugsnag from "bugsnag";
-import * as cors from "cors";
+import cors from "cors";
 import { $log } from "ts-log-debug";
 import * as path from "path";
 import * as Express from "express";
-import * as RateLimit from "express-rate-limit";
+import RateLimit from "express-rate-limit";
 import { TSEDVerboseLogging } from "../logger";
 
 @ServerSettings({

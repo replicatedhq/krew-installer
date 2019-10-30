@@ -2,6 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import * as _ from "lodash";
 import {Service} from "ts-express-decorators";
+import { KrewVersion } from "../krewversion/version";
 
 
 @Service()
@@ -9,6 +10,7 @@ export class Templates {
 
   private kurlURL: string;
   private replicatedAppURL: string;
+  private versionChecker: KrewVersion;
   private installTmpl: (any) => string;
   private pluginTmpl: (any) => string;
 
@@ -27,13 +29,17 @@ export class Templates {
     };
     this.installTmpl = _.template(fs.readFileSync(installTmplPath, "utf8"), opts);
     this.pluginTmpl = _.template(fs.readFileSync(pluginTmplPath, "utf8"), opts);
+
+    this.versionChecker = new KrewVersion();
   }
 
-  public renderKrewScript(): string {
-    return this.installTmpl({});
+  public async renderKrewScript(): Promise<string> {
+    let krewVersion = await this.versionChecker.getKrewVersion();
+    return this.installTmpl({version: krewVersion});
   }
 
-  public renderKrewScriptWithPlugin(pluginName: string): string {
-    return this.pluginTmpl({"plugin": pluginName});
+  public async renderKrewScriptWithPlugin(pluginName: string): Promise<string> {
+    let krewVersion = await this.versionChecker.getKrewVersion();
+    return this.pluginTmpl({version: krewVersion, plugin: pluginName});
   }
 }

@@ -1,4 +1,5 @@
 import * as pino from "pino";
+import P from "pino";
 import * as stream from "stream";
 import * as fs from "fs";
 
@@ -22,7 +23,7 @@ function initLoggerFromEnv(): pino.Logger {
   };
 
   if (!process.env.PINO_LOG_PRETTY) {
-    return pino(options, dest as stream.Writable).child({
+    return P(options, dest as stream.Writable).child({
       version: process.env.VERSION,
       component,
     });
@@ -30,7 +31,7 @@ function initLoggerFromEnv(): pino.Logger {
 
   const prettifier = pino.pretty();
   prettifier.pipe(dest);
-  return pino(options, prettifier).child({
+  return P(options, prettifier).child({
     version: process.env.VERSION,
     component,
   });

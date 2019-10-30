@@ -1,4 +1,4 @@
-import * as StatsdClient from "statsd-client";
+import StatsdClient from "statsd-client";
 import * as rp from "request-promise";
 
 import {
