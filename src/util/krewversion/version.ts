@@ -29,7 +29,7 @@ export class KrewVersion {
                 log("unable to query github", release.status);
                 return;
             }
-            this.lastVersion = release.data.name;
+            this.lastVersion = release.data.tag_name;
             this.lastChecked = new Date();
             log("found krew version: " + this.lastVersion);
         } catch (e) {
