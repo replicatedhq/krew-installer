@@ -12,6 +12,10 @@ steps:
           always-pull: true
           mount-checkout: true
           workdir: /go/src/github.com/replicatedhq/krew-installer
+    retry:
+      automatic:
+        - exit_status: 2  #typically means yarn exited
+          limit: 5
 
   - wait
 
