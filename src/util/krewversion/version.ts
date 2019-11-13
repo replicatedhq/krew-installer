@@ -1,5 +1,6 @@
 import Octokit from "@octokit/rest";
 import { log } from "../../logger";
+import moment from "moment";
 
 export class KrewVersion {
     private octokit: Octokit;
@@ -13,8 +14,7 @@ export class KrewVersion {
     }
 
     public async getKrewVersion(): Promise<string> {
-        const now = new Date().getUTCSeconds();
-        if ((now - (60 * 60)) > this.lastChecked.getUTCSeconds()) {
+        if (moment(Date()).isAfter(moment(this.lastChecked).add(1, "hour"))) {
             await this.updateVersion();
         }
 
