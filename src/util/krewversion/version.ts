@@ -1,10 +1,10 @@
 import Octokit from "@octokit/rest";
 import { log } from "../../logger";
-import moment from "moment";
+import moment, { Moment } from "moment";
 
 export class KrewVersion {
     private octokit: Octokit;
-    private lastChecked: Date;
+    private nextCheck: Moment;
     private lastVersion: string;
 
     constructor () {
@@ -14,7 +14,7 @@ export class KrewVersion {
     }
 
     public async getKrewVersion(): Promise<string> {
-        if (moment(Date()).isAfter(moment(this.lastChecked).add(1, "hour"))) {
+        if (moment().isAfter(this.nextCheck)) {
             await this.updateVersion();
         }
 
@@ -30,7 +30,7 @@ export class KrewVersion {
                 return;
             }
             this.lastVersion = release.data.tag_name;
-            this.lastChecked = new Date();
+            this.nextCheck = moment().add(1, "hour");
             log("found krew version: " + this.lastVersion);
         } catch (e) {
             log("exception updating krew version", e);
