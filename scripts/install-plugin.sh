@@ -15,7 +15,7 @@ tar zxvf krew.tar.gz &&
 
 EXPORT_PATH_STRING='export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"'
 
-if [ "$SHELL" == "/bin/bash" ]
+if [ "$SHELL" = "/bin/bash" ]
 then
     if [ -e ~/.bashrc ]
     then
@@ -34,7 +34,7 @@ then
         echo "please add '$EXPORT_PATH_STRING' to your login script"
     fi
 else
-    if [ "$SHELL" == "/bin/zsh" ]
+    if [ "$SHELL" = "/bin/zsh" ]
     then
         if [ -e ~/.zshrc ]
         then
