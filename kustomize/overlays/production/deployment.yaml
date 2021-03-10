@@ -15,18 +15,10 @@ spec:
                 operator: In
                 values:
                 - untrusted
-      volumes:
-        - name: sigsci
-          hostPath:
-            path: /var/run/sigsci
       containers:
         - name: krew-installer
           image: 799720048698.dkr.ecr.us-east-1.amazonaws.com/krew-installer:latest
           imagePullPolicy: Always
-          volumeMounts:
-            - mountPath: /var/run/sigsci/
-              name: sigsci
-              readOnly: false
           env:
             - name: USE_EC2_PARAMETERS
               value: "1"
