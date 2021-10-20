@@ -5,7 +5,7 @@ set -e
 # run krew install process
 
 cd "$(mktemp -d)" &&
-curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/download/{{= version }}/krew.{tar.gz,yaml}" &&
+curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/download/v0.4.1/krew.{tar.gz,yaml}" &&
 tar zxvf krew.tar.gz &&
 ./krew-"$(uname | tr '[:upper:]' '[:lower:]')_amd64" install \
 --manifest=krew.yaml --archive=krew.tar.gz
