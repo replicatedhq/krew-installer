@@ -3,12 +3,15 @@
 set -e
 
 # run krew install process
+# Taken directly from installation documentation: https://krew.sigs.k8s.io/docs/user-guide/setup/install/
 
-cd "$(mktemp -d)" &&
-curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/download/v0.4.1/krew.{tar.gz,yaml}" &&
-tar zxvf krew.tar.gz &&
-./krew-"$(uname | tr '[:upper:]' '[:lower:]')_amd64" install \
---manifest=krew.yaml --archive=krew.tar.gz
+set -x; cd "$(mktemp -d)" &&
+OS="$(uname | tr '[:upper:]' '[:lower:]')" &&
+ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" &&
+KREW="krew-${OS}_${ARCH}" &&
+curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/${KREW}.tar.gz" &&
+tar zxvf "${KREW}.tar.gz" &&
+./"${KREW}" install krew
 
 # add ${KREW_ROOT:-$HOME/.krew}/bin to PATH in bashrc/zshrc
 # but only if it does not already exist in bashrc/zshrc
