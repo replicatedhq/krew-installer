@@ -2,6 +2,7 @@
 
 set -e
 
+# run krew install process
 # Taken directly from installation documentation: https://krew.sigs.k8s.io/docs/user-guide/setup/install/
 
 set -x; cd "$(mktemp -d)" &&
