@@ -64,7 +64,7 @@ build_and_push:
 publish-staging: OVERLAY = staging
 publish-staging: GITOPS_OWNER = replicatedcom
 publish-staging: GITOPS_REPO = gitops-deploy
-publish-staging: GITOPS_BRANCH = master
+publish-staging: GITOPS_BRANCH = main
 publish-staging: GITOPS_FILENAME = krew-installer
 publish-staging: REGISTRY = 923411875752.dkr.ecr.us-east-1.amazonaws.com
 publish-staging: build_and_publish
