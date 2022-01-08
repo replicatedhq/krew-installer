@@ -19,10 +19,6 @@ exports.handler = (argv) => {
 };
 
 export async function main(argv: any): Promise<void> {
-  if (process.env["NEW_RELIC_LICENSE_KEY"]) {
-    require("newrelic");
-  }
-
   metrics.bootstrapFromEnv();
 
   await new Server(

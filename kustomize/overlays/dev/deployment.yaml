@@ -2,8 +2,16 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: krew-installer
+  labels:
+    tags.datadoghq.com/env: "dev"
 spec:
   template:
+    metadata:
+      labels:
+        tags.datadoghq.com/env: "dev"
     spec:
       containers:
         - name: krew-installer
+          env:
+            - name: USE_DATADOG_APM
+              value: "false"

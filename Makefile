@@ -23,7 +23,6 @@ lint:
 build: prebuild
 	`yarn bin`/tsc --project .
 	mkdir -p bin
-	cp newrelic.js bin/newrelic.js
 	cp build/krew-installer.js bin/krew-installer
 	chmod +x bin/krew-installer
 

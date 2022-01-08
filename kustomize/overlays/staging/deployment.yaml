@@ -2,9 +2,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: krew-installer
+  labels:
+    tags.datadoghq.com/env: "staging"
 spec:
   replicas: 3
   template:
+    metadata:
+      labels:
+        tags.datadoghq.com/env: "staging"
     spec:
       affinity:
         nodeAffinity:
@@ -28,3 +33,5 @@ spec:
               value: us-east-1
             - name: LOG_LEVEL
               value: debug
+            - name: USE_DATADOG_APM
+              value: "true"
