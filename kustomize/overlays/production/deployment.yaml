@@ -2,9 +2,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: krew-installer
+  labels:
+    tags.datadoghq.com/env: "production"
 spec:
   replicas: 3
   template:
+    metadata:
+      labels:
+        tags.datadoghq.com/env: "production"
     spec:
       affinity:
         nodeAffinity:
@@ -26,3 +31,5 @@ spec:
               value: "GIT_SHA_PLACEHOLDER"
             - name: AWS_REGION
               value: us-east-1
+            - name: USE_DATADOG_APM
+              value: "true"

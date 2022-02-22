@@ -8,7 +8,7 @@ steps:
       - "node_modules.tar.gz"
     plugins:
       - docker#v3.2.0:
-          image: replicated/gitops-builder:buildkite-go12-node10
+          image: replicated/gitops-builder:buildkite-go13-node10
           always-pull: true
           mount-checkout: true
           workdir: /go/src/github.com/replicatedhq/krew-installer
@@ -31,7 +31,7 @@ steps:
       - rm .dockerignore && cp deploy/.dockerignore .
       - ls
       - make build-staging
-    branches: master
+    branches: main
     env:
       AWS_PROFILE: replicated-staging
     plugins:
@@ -51,7 +51,7 @@ steps:
       - rm .dockerignore && cp deploy/.dockerignore .
       - ls
       - make build-production
-    branches: master
+    branches: main
     env:
       AWS_PROFILE: replicated-production
     plugins:
@@ -63,7 +63,7 @@ steps:
 
   - commands:
       - make publish-staging
-    branches: master
+    branches: main
     retry:
       automatic:
         # this command exiting with status 2 typically means that the git commit collided with another
@@ -71,11 +71,11 @@ steps:
           limit: 5
 
   - block: "Release to production"
-    branches: master
+    branches: main
 
   - commands:
       - make publish-production
-    branches: master
+    branches: main
     retry:
       automatic:
         # this command exiting with status 2 typically means that the git commit collided with another

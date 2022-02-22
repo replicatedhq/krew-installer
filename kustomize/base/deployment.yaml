@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: krew-installer
+  labels:
+    tags.datadoghq.com/service: "krew-installer"
 spec:
   selector:
     matchLabels:
@@ -10,6 +12,7 @@ spec:
     metadata:
       labels:
         app: krew-installer
+        tags.datadoghq.com/service: "krew-installer"
     spec:
       affinity:
         podAntiAffinity:

@@ -14,6 +14,7 @@ import * as path from "path";
 import * as Express from "express";
 import RateLimit from "express-rate-limit";
 import { TSEDVerboseLogging } from "../logger";
+import * as tracer from "../tracer";
 
 @ServerSettings({
   rootDir: path.resolve(__dirname),
@@ -56,6 +57,8 @@ export class Server extends ServerLoader {
       bugsnag.register(process.env["BUGSNAG_KEY"] || "");
       this.use(bugsnag.requestHandler);
     }
+
+    tracer.startTracer("krew-installer");
 
     this.use(bodyParser.json());
     this.use(bodyParser.urlencoded({
