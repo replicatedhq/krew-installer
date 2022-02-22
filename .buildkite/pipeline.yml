@@ -31,7 +31,7 @@ steps:
       - rm .dockerignore && cp deploy/.dockerignore .
       - ls
       - make build-staging
-    branches: master
+    branches: main
     env:
       AWS_PROFILE: replicated-staging
     plugins:
@@ -51,7 +51,7 @@ steps:
       - rm .dockerignore && cp deploy/.dockerignore .
       - ls
       - make build-production
-    branches: master
+    branches: main
     env:
       AWS_PROFILE: replicated-production
     plugins:
@@ -63,7 +63,7 @@ steps:
 
   - commands:
       - make publish-staging
-    branches: master
+    branches: main
     retry:
       automatic:
         # this command exiting with status 2 typically means that the git commit collided with another
@@ -71,11 +71,11 @@ steps:
           limit: 5
 
   - block: "Release to production"
-    branches: master
+    branches: main
 
   - commands:
       - make publish-production
-    branches: master
+    branches: main
     retry:
       automatic:
         # this command exiting with status 2 typically means that the git commit collided with another
