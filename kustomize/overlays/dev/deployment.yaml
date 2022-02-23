@@ -12,3 +12,6 @@ spec:
     spec:
       containers:
         - name: krew-installer
+          env:
+            - name: USE_DATADOG_APM
+              value: "false"
