@@ -29,6 +29,13 @@ spec:
       restartPolicy: Always
       containers:
         - name: krew-installer
+          resources:
+            requests:
+              cpu: 15m
+              memory: 70Mi
+            limits:
+              cpu: 50m
+              memory: 100Mi
           image: krew-installer
           imagePullPolicy: IfNotPresent
           ports:
