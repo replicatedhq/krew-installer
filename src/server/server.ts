@@ -1,3 +1,4 @@
+import * as tracer from "../tracer";
 import {
   InjectorService,
   OverrideMiddleware,
@@ -14,7 +15,6 @@ import * as path from "path";
 import * as Express from "express";
 import RateLimit from "express-rate-limit";
 import { TSEDVerboseLogging } from "../logger";
-import * as tracer from "../tracer";
 
 @ServerSettings({
   rootDir: path.resolve(__dirname),
