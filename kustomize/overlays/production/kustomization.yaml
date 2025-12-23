@@ -1,6 +1,8 @@
 bases:
 - ../../base
 
+namespace: default
+
 resources:
 - ./disruptionbudget.yaml
 
